@@ -1,1 +1,1 @@
-# TanDinh_Internship_JavaScript
+# TanDinh_Internship_JS

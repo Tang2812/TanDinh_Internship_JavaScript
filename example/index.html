@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Learning the DOM</title>
+  <style>
+    body {
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: sans-serif;
+    }
+
+    .active {
+      border: 2px solid blue;
+    }
+
+    .warning {
+      border: 2px solid red;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    div {
+      border: 2px dashed lightgray;
+      padding: 15px;
+      margin: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>Document Object Model</h1>
+  <div id="demo-1">This is an demo line</div>
+  <div id="demo-2">This is an demo line</div>
+  <div id="demo-2">This is an demo line</div>
+  <div id="demo-2">This is an demo line</div>
+  <div>Div 1</div>
+  <div class="active">Div 2</div>
+  <button id="button1">Click me now</button>
+  <div id="result">Result when you click</div>
+
+</body>
+<script src="./demoDOM.js"></script>
+
+</html>
