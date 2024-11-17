@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <h1 class="title">Loan repayment schedule</h1>
+  <!-- button -->
+  <div class="button-container">
+    <button class="btn active" onclick="activeButton(0)">Decreasing balance sheet</button>
+    <button class="btn" onclick="activeButton(1)">Table of fixed monthly payments</button>
+    <div class="line-under"></div>
+  </div>
+  <div class="calculate-container">
+    <!-- calculate form -->
+    <div class="calculate__form">
+      <div class="form__field">
+        <label class="field__name" for="property-value">Property value</label>
+        <input type="text" id="property-value" class="input-box">
+        <div class="field__unit">VND</div>
+      </div>
+      <div class="form__field">
+        <label class="field__name" for="loan-amount">Loan Amount</label>
+        <div class="slider-container">
+          <input type="range" id="slider" class="slider" name="slider" min="0" max="100" value="0">
+          <span id="sliderValue" class="slider-value">0</span>
+        </div>
+      </div>
+      <div class="form__field">
+        <label class="field__name" for="loan-amount">Loan Amount</label>
+        <input type="text" id="loan-amount" class="input-box">
+        <div class="field__unit">VND</div>
+      </div>
+      <div class="form__field">
+        <label class="field__name" for="loan-term">Loan term</label>
+        <input type="text" id="loan-term" class="input-box">
+        <div class="field__unit">Month</div>
+      </div>
+      <div class="form__field">
+        <label class="field__name" for="interest-rate">Interest rate</label>
+        <input type="text" id="interest-rate" class="input-box">
+        <div class="field__unit">%/Year</div>
+      </div>
+      <div class="form__field">
+        <label class="field__name" for="disbursement-date">Disbursement date</label>
+        <input type="date" id="disbursement-date" class="input-box">
+      </div>
+    </div>
+    <!-- result -->
+    <div class="calculate__result">
+      <img class="result__background-image" src="/src/assets/images/background_result.png" alt="background result">
+      <div class="result__content">
+        <img src="/src/assets/images/image_money.png" class="result__icon" alt="icon money">
+        <h2 class="result__title">Monthly payment amount</h2>
+        <div class="result__monthly-payment">
+          <div class="monthly-payment__min-amount">
+            <h2 class="result__title">From</h2>
+            <span class="result">0 VND</span>
+          </div>
+          <div class="monthly-payment__max-amount">
+            <h2 class="result__title">To</h2>
+            <span class="result">0 VND</span>
+          </div>
+        </div>
+        <div class="monthly-payment__total-iterest-payable">
+          <h2 class="result__title">Total interest payable</h2>
+          <span class="result">0 VND</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

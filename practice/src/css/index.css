@@ -1,0 +1,9 @@
+@import './components/button.css';
+@import './base/variables.css';
+@import './components/title.css';
+@import '/src/css/base/base.css ';
+@import '/src/css/sections/form_input.css';
+@import '/src/css/components/input_slider.css';
+@import '/src/css/sections/table_result.css';
+@import '/src/css/base/reset.css';
+@import '/src/css/sections/calculate_container.css' ;

@@ -1,0 +1,38 @@
+.button-container {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  width: fit-content;
+}
+
+.btn {
+  margin-bottom: 8px;
+  position: relative;
+  font-size: var(--body-size-md);
+  background-color: transparent;
+  color: var(--text-primary-color);
+  border: none;
+}
+
+.active {
+  font-weight: var(--semi-bold);
+  color: var(--text-default-color);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+
+.line-under {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 44%;
+  background: red;
+  transition: left 0.3s ease;
+}

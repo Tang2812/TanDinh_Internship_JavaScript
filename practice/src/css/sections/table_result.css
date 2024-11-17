@@ -1,0 +1,55 @@
+.result__background-image {
+
+  height: 100%;
+}
+
+.result__content {
+  top: 16px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 32px;
+  gap: 42px;
+}
+
+.result__icon {
+  width: 99px;
+  height: 69px;
+}
+
+.result__monthly-payment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.monthly-payment__min-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.monthly-payment__max-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.monthly-payment__total-iterest-payable{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result__title{
+  font-size: var(--body-size-xl);
+  color: var(--text-light-color);
+  font-weight: var(--regular);
+}
+
+.result{
+  font-size: var(--body-size-xl);
+  line-height: 36px;
+  color: var(--text-secondary-color);
+}
+
