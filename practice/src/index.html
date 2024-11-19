@@ -30,10 +30,16 @@
         <div class="slider-container">
           <input type="range" id="slider" class="slider" name="slider" min="0" max="100" value="0">
           <span id="sliderValue" class="slider-value">0</span>
+          <div class="value-limited">
+            <span>0%</span>
+            <span>100%</span>
+          </div>
         </div>
+
       </div>
       <div class="form__field">
-        <label class="field__name" for="loan-amount">Loan Amount</label>
+        <label class="field__name text-lighter" for="loan-amount">Enter the amount you want to borrow or drag to choose
+          a loan rate.</label>
         <input type="text" id="loan-amount" class="input-box">
         <div class="field__unit">VND</div>
       </div>
@@ -49,7 +55,7 @@
       </div>
       <div class="form__field">
         <label class="field__name" for="disbursement-date">Disbursement date</label>
-        <input type="date" id="disbursement-date" class="input-box">
+        <input type="text" id="disbursement-date" class="input-box">
       </div>
     </div>
     <!-- result -->
@@ -71,11 +77,86 @@
         <div class="monthly-payment__total-iterest-payable">
           <h2 class="result__title">Total interest payable</h2>
           <span class="result">0 VND</span>
+          <button class="btn-open-modal" onclick="openCloseModal()">See more</button>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <script src="./js/main.js"></script>
+
+  <!-- modal -->
+  <div class="modal-container">
+    <div class="table-result">
+      <div class="table-result__header">
+        <button class="header__cancel-button" onclick="openCloseModal()">
+          <img src="/src/assets/icons/x_icon.svg" alt="cancel-icon"></button>
+        <h1 class="table-result__title">Loan payment schedule sheet with decreasing balance</h1>
+      </div>
+      <table class="table-result__table">
+        <tr class="table__header-footer">
+          <th class="table__header-footer-content">#</th>
+          <th class="table__header-footer-content">REPAYMENT PERIOT</th>
+          <th class="table__header-footer-content">REMAINING ORIGINAL AMOUNT</th>
+          <th class="table__header-footer-content">ORIGIN</th>
+          <th class="table__header-footer-content">INTEREST</th>
+          <th class="table__header-footer-content">TOTAL PRINCIPAL + INTEREST</th>
+        </tr>
+        <tr class="table-result__content">
+          <td class="content__result">0</td>
+          <td class="content__result">18/11/2024</td>
+          <td class="content__result">3,200,000</td>
+          <td class="content__result">0</td>
+          <td class="content__result">0</td>
+          <td class="content__result">0</td>
+        </tr>
+        <tr class="table-result__content">
+          <td class="content__result">1</td>
+          <td class="content__result">18/12/2024</td>
+          <td class="content__result">2,880,000</td>
+          <td class="content__result">320,000</td>
+          <td class="content__result">2,667</td>
+          <td class="content__result">322,667</td>
+        </tr>
+        <tr class="table-result__content">
+          <td class="content__result">2</td>
+          <td class="content__result">18/01/2025</td>
+          <td class="content__result">2,560,000</td>
+          <td class="content__result">320,000</td>
+          <td class="content__result">2,400</td>
+          <td class="content__result">322,400</td>
+        </tr>
+        <tr class="table-result__content">
+          <td class="content__result">3</td>
+          <td class="content__result">18/02/2025</td>
+          <td class="content__result">2,880,000</td>
+          <td class="content__result">320,000</td>
+          <td class="content__result">2,667</td>
+          <td class="content__result">322,667</td>
+        </tr>
+        <tr class="table-result__content">
+          <td class="content__result">4</td>
+          <td class="content__result">18/03/2025</td>
+          <td class="content__result">2,880,000</td>
+          <td class="content__result">320,000</td>
+          <td class="content__result">2,667</td>
+          <td class="content__result">322,667</td>
+        </tr>
+        <tr class="table__header-footer">
+          <th class="table__header-footer-content">TOTAL</th>
+          <th class="table__header-footer-content"></th>
+          <th class="table__header-footer-content"></th>
+          <th class="table__header-footer-content">32000000</th>
+          <th class="table__header-footer-content">14667</th>
+          <th class="table__header-footer-content">3214667</th>
+        </tr>
+      </table>
+
+
+    </div>
+  </div>
+
+  <script src="./js/main.js"></script>
 </body>
 
 </html>

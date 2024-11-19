@@ -6,4 +6,6 @@
 @import '/src/css/components/input_slider.css';
 @import '/src/css/sections/table_result.css';
 @import '/src/css/base/reset.css';
+@import '/src/css/sections/modal.css';
 @import '/src/css/sections/calculate_container.css' ;
+

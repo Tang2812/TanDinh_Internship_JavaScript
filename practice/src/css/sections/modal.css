@@ -1,0 +1,79 @@
+.modal-container {
+  visibility: hidden;
+  position: fixed;
+  width: 100%;
+  opacity: 0;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;;
+}
+
+.modal--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.table-result__table {
+  border: none;
+  border-collapse: collapse;
+  border-radius: var(--border-radius-md);
+}
+
+.table-result {
+  background-color: var(--background-primary-color);
+  padding: 0 20px;
+  border-radius: var(--border-radius-md);
+}
+
+.table-result__header {
+  position: relative;
+  width: 100%;
+  border-bottom: solid 1px black;
+  margin-bottom: 8px;
+}
+
+.table-result__title {
+  font-size: var(--body-size-lg);
+  font-weight: var(--regular);
+  line-height: 1.5;
+}
+
+
+.table__header-footer-content {
+  background-color: var(--background-secondary-color);
+  color: var(--text-secondary-color);
+  font-size: var(--body-size-md);
+  border-bottom: solid 1px var(--border-secondary-color);
+  padding: 16px;
+}
+
+.table-result__content {
+  border-bottom: solid 1px var(--border-secondary-color);
+}
+
+.content__result {
+  text-align: center;
+  padding: 16px;
+  background-color: var(--background-light);
+}
+
+.table-result__table {
+  margin: 20px 0;
+}
+
+.header__cancel-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.header__cancel-button:hover {
+  cursor: pointer;
+}

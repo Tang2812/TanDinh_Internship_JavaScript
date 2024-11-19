@@ -35,21 +35,35 @@
   gap: 20px;
 }
 
-.monthly-payment__total-iterest-payable{
+.monthly-payment__total-iterest-payable {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.result__title{
+.result__title {
   font-size: var(--body-size-xl);
   color: var(--text-light-color);
   font-weight: var(--regular);
 }
 
-.result{
+.result {
   font-size: var(--body-size-xl);
   line-height: 36px;
   color: var(--text-secondary-color);
 }
 
+.btn-open-modal {
+  display: flex;
+  border: none;
+  align-items: start;
+  background-color: transparent;
+  color: var(--text-secondary-color);
+  font-size: var(--body-size-md);
+  font-weight: var(--medium);
+}
+
+.btn-open-modal:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
