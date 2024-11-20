@@ -1,6 +1,9 @@
 .result__background-image {
-
   height: 100%;
+}
+
+.calculate__result {
+  position: relative;
 }
 
 .result__content {
@@ -66,4 +69,20 @@
 .btn-open-modal:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 739px) {
+  .calculate__result {
+    position: relative;
+    width: 100%;
+    height: 400px;
+  }
+
+  .result__background-image {
+   width: 100%;
+  height: 120%;
+    max-height: 120%;
+  }
+
 }

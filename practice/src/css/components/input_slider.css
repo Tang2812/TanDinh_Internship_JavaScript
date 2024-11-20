@@ -44,3 +44,10 @@
   width: 90%;
   top: 28px;
 }
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 739px) {
+  .slider-container{
+    width: 100%;
+  }
+}
