@@ -1,0 +1,5 @@
+.title {
+  font-size: var(--heading-size-md);
+  font-weight: var(--regular);
+  line-height: 125%;
+}
