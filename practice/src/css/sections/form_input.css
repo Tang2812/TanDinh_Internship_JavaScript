@@ -1,15 +1,17 @@
 .calculate__form {
   background-color: var(--background-primary-color);
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   padding: 24px;
-  gap: 24px;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 .form__field {
   display: flex;
   position: relative;
+  width: 100%;
 
 }
 
@@ -23,27 +25,45 @@
 }
 
 .input-box {
-  width: 70%;
-  height: 19px;
-  padding: 18.5px 14px;
+  width: 85%;
   font-size: var(--body-size-md);
   font-weight: var(--medium);
+  border: none;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.content-errors {
+  width: 70%;
+}
+
+.error-message {
+  display: flex;
+  margin-top: 13px;
+  color: var(--text-danger-color);
+}
+
+.field__input-group {
+  isolation: isolate;
+  position: relative;
+  height: 19px;
+  padding: 18.5px 14px;
   border-radius: 10px;
   border: solid 1px var(--border-primary-color);
 }
 
-.input-box:focus-visible,
-.input-box:target,
-.input-box:active,
-.input-box:hover {
+.field__input-group:focus-visible,
+.field__input-group:target,
+.field__input-group:active,
+.field__input-group:hover {
   border: solid 1px var(--border-focus-color);
 }
 
 .field__unit {
   color: var(--text-primary-color);
   position: absolute;
-  right: 8px;
-  display: flex;
+  right: 20px;
+  top: 35%;
   align-items: center;
   height: 100%;
 
@@ -57,33 +77,30 @@
   cursor: pointer;
 }
 
-/* .calendar-icon {
+.calendar-icon {
+  z-index: -1;
   position: absolute;
   width: 32px;
   height: 32px;
-
+  top: 25%;
+  right: 20px;
 }
 
-.calendar-input {
-  max-width: 80%;
+.calendar-icon:hover {
+  cursor: pointer;
+}
+
+#datepicker {
   width: 100%;
-  position: relative;
 }
 
-.input-calendar-box {
-  width: 90%;
-  height: 19px;
-  padding: 18.5px 14px;
-  border-radius: 10px;
-  border: solid 1px var(--border-primary-color);
-} */
 
 
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 739px) {
   .calculate__form {
     position: relative;
-    width: 92%;
+    width: 100%;
   }
 
   .result__background-image {
@@ -96,11 +113,12 @@
     flex-direction: column;
   }
 
-  .input-box {
+  .field__input-group {
     width: 95%;
   }
 
-  .field__unit{
-    top: 20%
+  .content-errors {
+    width: 100%;
   }
+
 }

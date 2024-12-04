@@ -6,3 +6,7 @@ h2 {
 input:focus {
   outline: none;
 }
+
+body {
+  margin: 0;
+}
