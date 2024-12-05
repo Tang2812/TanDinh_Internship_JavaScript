@@ -2,4 +2,5 @@
 /.idea/*
 #Dependencies
 node_modules/
-
+.parcel-cache/
+dist/

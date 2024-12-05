@@ -10,6 +10,7 @@
 
 .form__field {
   display: flex;
+  justify-content: space-between;
   position: relative;
   width: 100%;
 
@@ -19,7 +20,6 @@
   display: flex;
   font-size: var(--body-size-md);
   font-weight: var(--semi-bold);
-  max-width: 40%;
   width: 40%;
   margin: 8px 0;
 }
@@ -94,7 +94,30 @@
   width: 100%;
 }
 
+.long-title {
+  width: 80%;
+}
 
+/* tablet */
+@media only screen and (min-width: 740px) and (max-width: 1024px) {
+  .calculate__form {
+    width: 100%;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .result__background-image {
+    width: 100%;
+    height: 120%;
+    max-height: 120%;
+  }
+
+
+
+}
 
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 739px) {
@@ -113,8 +136,17 @@
     flex-direction: column;
   }
 
-  .field__input-group {
-    width: 95%;
+
+  .long-title {
+    width: 100%;
+  }
+
+  .field__name {
+    font-size: var(--body-size-sm);
+  }
+
+  .field__name {
+    width: 100%;
   }
 
   .content-errors {

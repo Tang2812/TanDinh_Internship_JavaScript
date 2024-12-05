@@ -114,7 +114,7 @@ const FormInputView = {
       number = number + 1;
       ordinalNumber.textContent = number;
       repaymentPeriod.textContent = item.repaymentPeriod;
-      !isNaN(item.remainningOriginalAmount) ? remainingOriginalAmount.textContent = item.remainningOriginalAmount : remainingOriginalAmount.textContent = '0';
+      !isNaN(item.remainningOriginalAmount) ? remainingOriginalAmount.textContent = FormInputController.reformater(item.remainningOriginalAmount) : remainingOriginalAmount.textContent = '0';
       !isNaN(item.origin) ? origin.textContent = FormInputController.reformater(item.origin) : origin.textContent = '0';
       !isNaN(item.interest) ? interest.textContent = FormInputController.reformater(item.interest) : interest.textContent = '0';
       !isNaN(item.toralPrincipalAndInterest) ? total.textContent = FormInputController.reformater(item.toralPrincipalAndInterest) : total.textContent = '0';

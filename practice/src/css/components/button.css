@@ -35,3 +35,15 @@
   background: red;
   transition: left 0.3s ease;
 }
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 739px) {
+  .button-container {
+    gap: 8px;
+
+  }
+
+  .btn {
+    font-size: var(--body-size-sm);
+  }
+}

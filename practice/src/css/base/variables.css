@@ -3,6 +3,7 @@
   /* font size */
   --heading-size-sm: 11px;
   --heading-size-md: 28px;
+  --heading-size-responsive: 16px;
   --body-size-xs: 11px;
   --body-size-sm: 12px;
   --body-size-md: 16px;
@@ -37,4 +38,5 @@
   --border-primary-color: #e3e4e6;
   --border-secondary-color: #e0e0e0;
   --border-focus-color: #007aff;
+  --border-danger-color: #D12953;
 }

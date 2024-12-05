@@ -27,7 +27,6 @@
 
 .result__monthly-payment {
   display: flex;
-  gap: 50px;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -77,6 +76,17 @@
   text-decoration: underline;
 }
 
+/* tablet */
+@media only screen and (min-width: 740px) and (max-width: 1024px) {
+  .calculate__result {
+    width: 100%;
+  }
+
+  .result__monthly-payment {
+    width: 80%;
+  }
+}
+
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 739px) {
   .calculate__result {
@@ -88,4 +98,8 @@
     width: 100%;
   }
 
+  .result__monthly-payment {
+    gap: 50px;
+    flex-direction: column;
+  }
 }

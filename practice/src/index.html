@@ -46,8 +46,11 @@
 
       </div>
       <div class="form__field">
-        <label class="field__name text-lighter" for="loan-amount">Enter the amount you want to borrow or drag to choose
-          a loan rate.</label>
+        <div class="field__name">
+          <label class="long-title text-lighter" for="loan-amount">Enter the amount you want to borrow or drag to choose
+            a loan rate.</label>
+        </div>
+
         <div class="content-errors">
           <div class="field__input-group">
             <input type="text" id="loan-amount" class="input-box" onchange="">
@@ -144,19 +147,18 @@
             <th class="table__header-footer-content" id="total-payment">0</th>
           </tr>
         </tfoot>
-
       </table>
-      <button id="export">Export to excel</button>
+      <button class="button-export" id="export">Export to excel</button>
 
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-  <script src="./js/views/PageLoadView.js"></script>
-  <script src="./js/controllers/PageLoadController.js"></script>
-  <script src="./js/models/LoanPaymentModel.js"></script>
-  <script src="./js/models/LoanModel.js"></script>
-  <script src="./js/views/FormInputView.js"></script>
-  <script src="./js/controllers/FormInputController.js"></script>
+  <script src="./js/views/page_load_view.js"></script>
+  <script src="./js/controllers/page_load_controller.js"></script>
+  <script src="./js/models/loan_payment_model.js"></script>
+  <script src="./js/models/loan_model.js"></script>
+  <script src="./js/views/form_input_view.js"></script>
+  <script src="./js/controllers/form_input_controller.js"></script>
   <script src="./js/main.js"></script>
 </body>
 

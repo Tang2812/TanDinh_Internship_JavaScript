@@ -111,9 +111,56 @@ tfoot {
   cursor: pointer;
 }
 
+.button-export {
+  background-color: transparent;
+  border-radius: 15px;
+  float: right;
+  padding: 8px;
+}
+
+.button-export:hover {
+  border: solid 2px var(--border-danger-color);
+  cursor: pointer;
+}
+/* modal */
+@media only screen and (min-width: 740px) and (max-width: 1024px) {
+  .modal-container {
+    overflow: auto;
+  }
+
+  .table__header-footer-content {
+    padding: 0;
+    font-size: var(--body-size-sm);
+  }
+
+  .content__result {
+    font-size: var(--body-size-sm);
+  }
+
+  .table-result__title {
+    width: 90%;
+    font-size: var(--body-size-md);
+  }
+}
+
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 739px) {
   .modal-container {
     overflow: auto;
   }
+
+  .table__header-footer-content {
+    padding: 0;
+    font-size: var(--body-size-sm);
+  }
+
+  .content__result {
+    font-size: var(--body-size-sm);
+  }
+
+  .table-result__title {
+    width: 90%;
+    font-size: var(--body-size-md);
+  }
+
 }

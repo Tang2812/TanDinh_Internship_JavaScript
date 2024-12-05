@@ -23,12 +23,12 @@ const FormInputController = {
 
     // Caculate Loan Payment
     if (object.loanTerm < 2) {
-      interest = Math.round(remainingOriginalAmount * (object.interestRate / 100) / 12);
+      interest = remainingOriginalAmount * (object.interestRate / 100) / 12;
       totaInterestPayple = remainingOriginalAmount + interest;
       const resultRecord = new LoanPaymentModel(remainingOriginalAmount, remainingOriginalAmount, interest, object.disbursementDate, totaInterestPayple);
       result.push(resultRecord);
     } else {
-      origin = Math.round(remainingOriginalAmount / object.loanTerm);
+      origin = remainingOriginalAmount / object.loanTerm;
       for (let i = 1; i <= object.loanTerm; i++) {
         interest = Math.round(remainingOriginalAmount * (object.interestRate / 100) / 12);
         (remainingOriginalAmount - origin) >= 0 ? remainingOriginalAmount = remainingOriginalAmount - origin : remainingOriginalAmount = 0;
@@ -48,16 +48,16 @@ const FormInputController = {
     totalInterest = totaInterestPayple - loanAmount;
 
     // reformat totalInterest
-    !isNaN(totalInterest) ? totalInterest = this.reformater(totalInterest) : totalInterest = 0;
+    !isNaN(totalInterest) ? totalInterest = this.reformater(Math.round(totalInterest)) : totalInterest = 0;
 
     // reformat totaInterestPayple
-    !isNaN(totaInterestPayple) ? totaInterestPayple = this.reformater(totaInterestPayple) : totaInterestPayple = 0;
+    !isNaN(totaInterestPayple) ? totaInterestPayple = this.reformater(Math.round(totaInterestPayple)) : totaInterestPayple = 0;
 
     // reformat minMonthlyPayment
-    !isNaN(minMonthlyPayment) ? minMonthlyPayment = this.reformater(minMonthlyPayment) : minMonthlyPayment = 0;
+    !isNaN(minMonthlyPayment) ? minMonthlyPayment = this.reformater(Math.round(minMonthlyPayment)) : minMonthlyPayment = 0;
 
     // reformat maxMonthlyPayment
-    !isNaN(maxMonthlyPayment) ? maxMonthlyPayment = this.reformater(maxMonthlyPayment) : maxMonthlyPayment = 0;
+    !isNaN(maxMonthlyPayment) ? maxMonthlyPayment = this.reformater(Math.round(maxMonthlyPayment)) : maxMonthlyPayment = 0;
 
     // save data to localStorage
     localStorage.setItem('result', JSON.stringify(result));
