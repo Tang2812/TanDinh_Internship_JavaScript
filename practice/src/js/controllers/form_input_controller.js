@@ -30,7 +30,7 @@ const FormInputController = {
     } else {
       origin = remainingOriginalAmount / object.loanTerm;
       for (let i = 1; i <= object.loanTerm; i++) {
-        interest = Math.round(remainingOriginalAmount * (object.interestRate / 100) / 12);
+        interest = remainingOriginalAmount * (object.interestRate / 100) / 12;
         (remainingOriginalAmount - origin) >= 0 ? remainingOriginalAmount = remainingOriginalAmount - origin : remainingOriginalAmount = 0;
         repaymentPeriod = this.calculateRepaymentDate(repaymentPeriod);
         const resultRecord = new LoanPaymentModel(origin, remainingOriginalAmount, interest, repaymentPeriod);

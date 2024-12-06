@@ -43,6 +43,7 @@ const PageLoadView = {
     const loanAmount = document.querySelector('#loan-amount');
     const sliderValue = document.querySelector('#sliderValue');
     const loanRate = document.querySelector('#slider');
+    const propertyValueInputBox = document.querySelector('#property-value');
 
     loanAmount.addEventListener('input', (e) => {
       const propertyValue = Number(document.querySelector('#property-value').value.replace(/,/g, ''));
