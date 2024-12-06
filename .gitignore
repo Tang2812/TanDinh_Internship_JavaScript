@@ -1,2 +1,6 @@
 #ignore all files in .idea
 /.idea/*
+#Dependencies
+node_modules/
+.parcel-cache/
+dist/
