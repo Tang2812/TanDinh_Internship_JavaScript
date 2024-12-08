@@ -126,28 +126,31 @@
           <img src="/src/assets/icons/x_icon.svg" alt="cancel-icon"></button>
         <h1 class="table-result__title">Loan payment schedule sheet with decreasing balance</h1>
       </div>
-      <table class="table-result__table" id="modal-table-result">
-        <thead class="table__header-footer">
-          <th class="table__header-footer-content">#</th>
-          <th class="table__header-footer-content">REPAYMENT PERIOT</th>
-          <th class="table__header-footer-content">REMAINING ORIGINAL AMOUNT</th>
-          <th class="table__header-footer-content">ORIGIN</th>
-          <th class="table__header-footer-content">INTEREST</th>
-          <th class="table__header-footer-content">TOTAL PRINCIPAL + INTEREST</th>
-        </thead>
-        <tbody>
-        </tbody>
-        <tfoot>
-          <tr class="table__header-footer">
-            <th class="table__header-footer-content">TOTAL</th>
-            <th class="table__header-footer-content"></th>
-            <th class="table__header-footer-content"></th>
-            <th class="table__header-footer-content" id="total-origin">0</th>
-            <th class="table__header-footer-content" id="total-interest">0</th>
-            <th class="table__header-footer-content" id="total-payment">0</th>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="table-result__body">
+        <table class="table-result__table" id="modal-table-result">
+          <thead class="table__header-footer">
+            <th class="table__header-footer-content">#</th>
+            <th class="table__header-footer-content">REPAYMENT PERIOT</th>
+            <th class="table__header-footer-content">REMAINING ORIGINAL AMOUNT</th>
+            <th class="table__header-footer-content">ORIGIN</th>
+            <th class="table__header-footer-content">INTEREST</th>
+            <th class="table__header-footer-content">TOTAL PRINCIPAL + INTEREST</th>
+          </thead>
+          <tbody>
+          </tbody>
+          <tfoot>
+            <tr class="table__header-footer">
+              <th class="table__header-footer-content">TOTAL</th>
+              <th class="table__header-footer-content"></th>
+              <th class="table__header-footer-content"></th>
+              <th class="table__header-footer-content" id="total-origin">0</th>
+              <th class="table__header-footer-content" id="total-interest">0</th>
+              <th class="table__header-footer-content" id="total-payment">0</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
       <button class="button-export" id="export">Export to excel</button>
 
     </div>
