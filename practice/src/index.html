@@ -4,10 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="/css/index.css">
   <title>Loan caculator</title>
 </head>
 
@@ -16,8 +13,8 @@
   <h1 class="title">Loan repayment schedule</h1>
   <!-- button -->
   <div class="button-container">
-    <button class="btn active" onclick="activeButton(0)">Decreasing balance sheet</button>
-    <button class="btn" onclick="activeButton(1)">Table of fixed monthly payments</button>
+    <button class="btn active" id="btn-active-0">Decreasing balance sheet</button>
+    <button class="btn"  id="btn-active-1">Table of fixed monthly payments</button>
     <div class="line-under"></div>
   </div>
   <div class="calculate-container">
@@ -85,7 +82,7 @@
         <div class="content-errors">
           <div class="field__input-group">
             <input type="text" id="datepicker" class="input-box">
-            <img src="/src/assets/icons/calendar.svg" class="calendar-icon" alt="calendar-icon">
+            <img src="/assets/icons/calendar.svg" class="calendar-icon" alt="calendar-icon">
           </div>
           <label class="error-message" id="date-time-error"></label>
         </div>
@@ -93,9 +90,9 @@
     </div>
     <!-- result -->
     <div class="calculate__result">
-      <img class="result__background-image" src="/src/assets/images/background_result.png" alt="background result">
+      <img class="result__background-image" src="/assets/images/background_result.png" alt="background result">
       <div class="result__content">
-        <img src="/src/assets/images/image_money.png" class="result__icon" alt="icon money">
+        <img src="/assets/images/image_money.png" class="result__icon" alt="icon money">
         <h2 class="result__title">Monthly payment amount</h2>
         <div class="result__monthly-payment">
           <div class="monthly-payment__min-amount">
@@ -110,7 +107,7 @@
         <div class="monthly-payment__total-iterest-payable">
           <h2 class="result__title">Total interest payable</h2>
           <span class="result" id="total-interest-payable">0 VND</span>
-          <button class="btn-open-modal" onclick="openCloseModal()">See more</button>
+          <button class="btn-open-modal" id="button-export">See more</button>
         </div>
 
       </div>
@@ -122,8 +119,8 @@
   <div class="modal-container">
     <div class="table-result">
       <div class="table-result__header">
-        <button class="header__cancel-button" onclick="openCloseModal()">
-          <img src="/src/assets/icons/x_icon.svg" alt="cancel-icon"></button>
+        <button class="header__cancel-button"  id="button-export">
+          <img src="/assets/icons/x_icon.svg" alt="cancel-icon"></button>
         <h1 class="table-result__title">Loan payment schedule sheet with decreasing balance</h1>
       </div>
       <div class="table-result__body">
@@ -155,14 +152,13 @@
 
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-  <script src="./js/views/page_load_view.js"></script>
-  <script src="./js/controllers/page_load_controller.js"></script>
-  <script src="./js/models/loan_payment_model.js"></script>
-  <script src="./js/models/loan_model.js"></script>
-  <script src="./js/views/form_input_view.js"></script>
-  <script src="./js/controllers/form_input_controller.js"></script>
-  <script src="./js/main.js"></script>
+  <script type="module" src="./js/views/page_load_view.js"></script>
+  <script type="module" src="./js/controllers/page_load_controller.js"></script>
+  <script type="module" src="./js/models/loan_payment_model.js"></script>
+  <script type="module" src="./js/models/loan_model.js"></script>
+  <script type="module" src="./js/views/form_input_view.js"></script>
+  <script type="module" src="./js/controllers/form_input_controller.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 
 </html>

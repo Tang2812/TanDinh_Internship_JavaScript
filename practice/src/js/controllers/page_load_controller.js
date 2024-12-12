@@ -1,4 +1,5 @@
-const PageLoadController = {
+import { PageLoadView } from "../views/page_load_view";
+export const PageLoadController = {
   init: function () {
     PageLoadView.init();
   },
@@ -6,8 +7,9 @@ const PageLoadController = {
   // reformat number input
   reformatNumber: function (idElement) {
     document.addEventListener('DOMContentLoaded', () => {
-      const numberInput = document.querySelector(idElement);
-      numberInput.addEventListener('input', (e) => {
+      const number_input = document.querySelector(idElement);
+
+      number_input.addEventListener('input', (e) => {
         let value = e.target.value;
         value = value.replace(/,/g, '');
         if (!isNaN(value) && value !== '') {
@@ -30,11 +32,12 @@ const PageLoadController = {
 
   // get date today
   getDayToDay: function () {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const result = `${day}/${month}/${year}`;
+    const date = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric'}
+    const result = date.toLocaleDateString('en-GB', options);
+
+
     return result;
   }
 }
+

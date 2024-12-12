@@ -1,3 +1,8 @@
+import * as XLSX from 'xlsx';
+import { LoanModel } from '../models/loan_model';
+import { LoanPaymentModel } from '../models/loan_payment_model';
+import { FormInputView } from '../views/form_input_view';
+import { PageLoadController } from './page_load_controller';
 const FormInputController = {
   innit: function () {
     FormInputView.init();
@@ -47,23 +52,48 @@ const FormInputController = {
 
     totalInterest = totaInterestPayple - loanAmount;
 
-    // reformat totalInterest
-    !isNaN(totalInterest) ? totalInterest = this.reformater(Math.round(totalInterest)) : totalInterest = 0;
-
-    // reformat totaInterestPayple
-    !isNaN(totaInterestPayple) ? totaInterestPayple = this.reformater(Math.round(totaInterestPayple)) : totaInterestPayple = 0;
-
-    // reformat minMonthlyPayment
-    !isNaN(minMonthlyPayment) ? minMonthlyPayment = this.reformater(Math.round(minMonthlyPayment)) : minMonthlyPayment = 0;
-
-    // reformat maxMonthlyPayment
-    !isNaN(maxMonthlyPayment) ? maxMonthlyPayment = this.reformater(Math.round(maxMonthlyPayment)) : maxMonthlyPayment = 0;
+    // check number
+    totalInterest = this.checkIfNAN(totalInterest)
+    totaInterestPayple = this.checkIfNAN(totaInterestPayple);
+    minMonthlyPayment = this.checkIfNAN(minMonthlyPayment);
+    maxMonthlyPayment = this.checkIfNAN(maxMonthlyPayment);
 
     // save data to localStorage
     localStorage.setItem('result', JSON.stringify(result));
 
     // set value for table result
-    FormInputView.setValueOfTableResult(totaInterestPayple, minMonthlyPayment, maxMonthlyPayment, totalInterest, totalOrigin, result);
+    FormInputView.setValueOfTableResultAndModal(totaInterestPayple, minMonthlyPayment, maxMonthlyPayment, totalInterest, totalOrigin, result);
+  },
+
+  // function check NAN value
+  checkIfNAN: function (value) {
+    if (!isNaN(value)) {
+      value = this.reformater(Math.round(value))
+    } else {
+      value = 0;
+    }
+    return value
+  },
+
+  // function check value greater than 0 or is a number
+  checkValueGreaterThan0: function (value, inputErrors, string) {
+    if (value < 0 || isNaN(value)) {
+      inputErrors.inputStatus = false;
+      if (value <= 0) inputErrors.errorMessages.push(`${string} value must greater than 0`);
+      if (isNaN(value)) inputErrors.errorMessages.push(`${string} value must be a number`);
+    } else {
+      inputErrors.errorMessages.push('');
+    };
+  },
+
+  // function check date in pass
+  checkDateInPass: function (date, inputErrors) {
+    if (this.isDateInPast(date)) {
+      inputErrors.inputStatus = false;
+      inputErrors.errorMessages.push('Date cannot be in the past');
+    } else {
+      inputErrors.errorMessages.push('');
+    }
   },
 
   // validate value
@@ -74,62 +104,20 @@ const FormInputController = {
     };
 
     // validate value of property
-    if (valueOfPropertyValue < 0 || isNaN(valueOfPropertyValue)) {
-      inputErrors.inputStatus = false;
-      if (valueOfPropertyValue <= 0) inputErrors.errorMessages.push('Property value must greater than 0');
-      if (isNaN(valueOfPropertyValue)) inputErrors.errorMessages.push('Property value must be a number');
-    } else {
-      inputErrors.errorMessages.push('');
-    };
+    this.checkValueGreaterThan0(valueOfPropertyValue, inputErrors, 'Property');
 
     // validate value loan amount
-    if (valueOfLoanAmount < 0 || isNaN(valueOfLoanAmount)) {
-      inputErrors.inputStatus = false;
-      if (valueOfLoanAmount < 0) inputErrors.errorMessages.push('Loan value must greater than 0');
-      if (isNaN(valueOfLoanAmount)) inputErrors.errorMessages.push('Loan value must be a number');
-    } else {
-      inputErrors.errorMessages.push('');
-    };
+    this.checkValueGreaterThan0(valueOfLoanAmount, inputErrors, 'Loan value');
 
     // validate loan term
-    if (valueOfLoanTerm < 0 || isNaN(valueOfLoanTerm)) {
-      inputErrors.inputStatus = false;
-      if (valueOfLoanTerm < 0) inputErrors.errorMessages.push('Loan term must greater than 0');
-      if (isNaN(valueOfLoanTerm)) inputErrors.errorMessages.push('Loan term must be a number');
-    } else {
-      inputErrors.errorMessages.push('');
-    };
+    this.checkValueGreaterThan0(valueOfLoanTerm, inputErrors, 'Loan term');
 
     // validate interst rate
-    if (valueOfInterestRate < 0 || isNaN(valueOfInterestRate)) {
-      inputErrors.inputStatus = false;
-      if (valueOfInterestRate < 0) inputErrors.errorMessages.push('Interest rate must greater than 0');
-      if (isNaN(valueOfInterestRate)) inputErrors.errorMessages.push('Interest rate must be a number');
-    } else {
-      inputErrors.errorMessages.push('');
-    };
+    this.checkValueGreaterThan0(valueOfInterestRate, inputErrors, 'Interest rate');
 
     // validate Disbursement date
-    const date = PageLoadController.getDayToDay();
-    const [day, month, year] = date.split('/').map(Number);
-    const [inputDay, inputMonth, inputYear] = valueOfDisbursementDate.split('/').map(Number);
+    this.checkDateInPass(valueOfDisbursementDate, inputErrors)
 
-    if (inputYear < year) {
-      inputErrors.inputStatus = false;
-      inputErrors.errorMessages.push('Date cannot be in the past');
-    } else {
-      if (inputMonth < month) {
-        inputErrors.inputStatus = false;
-        inputErrors.errorMessages.push('Date cannot be in the past');
-      } else {
-        if (inputDay < day) {
-          inputErrors.inputStatus = false;
-          inputErrors.errorMessages.push('Date cannot be in the past');
-        } else {
-          inputErrors.errorMessages.push('');
-        }
-      }
-    }
     return inputErrors;
   },
 
@@ -147,27 +135,40 @@ const FormInputController = {
 
   // function calculate number of date in a month
   getDaysInMonth: function (month, year) {
-    return [31, (this.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+    const DATES_OF_MONTH = [31, (this.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return DATES_OF_MONTH[month - 1];  /*DATES_OF_MONTH start from index 0*/
   },
 
-  // function calculate loan repayment
+  // function check is date in past
+  isDateInPast: function (valueOfDisbursementDate) {
+    const date = PageLoadController.getDayToDay();
+    const [day, month, year] = date.split('/').map(Number);
+    const [inputDay, inputMonth, inputYear] = valueOfDisbursementDate.split('/').map(Number);
+
+    if (inputYear < year) return true;
+    if (inputYear === year && inputMonth < month) return true;
+    if (inputYear === year && inputMonth === month && inputDay < day) return true;
+    return false;
+  },
+  // function calculate loan repayment time
   calculateRepaymentDate: function (date) {
     const [day, month, year] = date.split('/').map(Number);
-    const daysOfMonth = this.getDaysInMonth(month, year);
+    const DAYS_OF_MONTH = this.getDaysInMonth(month, year);
+    const TOTAL_MONTHS_OF_YEAR = 12;
     let newMonth = month;
     let newDay = day;
     let newYear = year;
     let newDate;
 
     newMonth = newMonth + 1;
-    if (newMonth > 12) {
+    if (newMonth > TOTAL_MONTHS_OF_YEAR) {
       newMonth = 1;
       newYear = newYear + 1;
     };
 
     // check Day
-    if (newDay > daysOfMonth) {
-      newDay = daysOfMonth;
+    if (newDay > DAYS_OF_MONTH) {
+      newDay = DAYS_OF_MONTH;
     }
 
     newDate = `${newDay}/${newMonth}/${newYear}`;
@@ -183,3 +184,5 @@ const FormInputController = {
     XLSX.writeFile(workbook, 'loan_data.xlsx');
   }
 }
+
+export default FormInputController;

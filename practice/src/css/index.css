@@ -1,10 +1,10 @@
-@import '/src/css/base/reset.css';
+@import './base/reset.css';
 @import './components/button.css';
 @import './base/variables.css';
 @import './components/title.css';
 @import './base/base.css';
-@import '/src/css/sections/form_input.css';
-@import '/src/css/components/input_slider.css';
-@import '/src/css/sections/table_result.css';
-@import '/src/css/sections/modal.css';
-@import '/src/css/sections/calculate_container.css';
+@import './sections/form_input.css';
+@import './components/input_slider.css';
+@import './sections/table_result.css';
+@import './sections/modal.css';
+@import './sections/calculate_container.css';

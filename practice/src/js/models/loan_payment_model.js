@@ -1,4 +1,4 @@
-class LoanPaymentModel {
+export class LoanPaymentModel {
   origin
   remainningOriginalAmount
   interest

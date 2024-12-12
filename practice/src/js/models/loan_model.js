@@ -1,4 +1,4 @@
-class LoanModel {
+export class LoanModel {
   propertyValue
   loanAmount
   loanTerm
@@ -12,6 +12,4 @@ class LoanModel {
     this.interestRate = interestRate;
     this.disbursementDate = disbursementDate;
   }
-
-
 }
