@@ -1,4 +1,5 @@
 import FormInputController from "../controllers/form_input_controller";
+import { LoanPaymentModel } from "../models/loan_payment_model";
 export const FormInputView = {
 
   init: function () {
@@ -35,8 +36,8 @@ export const FormInputView = {
 
   // Get value from input boxes
   getValue: function (propertyValue, loanAmount, loanTerm, interestRate, disbursementDate) {
-    const valueOfPropertyValue = Number(propertyValue.value.replace(/,/g, ''));
-    const valueOfLoanAmount = Number(loanAmount.value.replace(/,/g, ''));
+    const valueOfPropertyValue = Number(propertyValue.value.replace(/\./g, ''));
+    const valueOfLoanAmount = Number(loanAmount.value.replace(/\./g, ''));
     const valueOfLoanTerm = Number(loanTerm.value);
     const valueOfInterestRate = Number(interestRate.value);
     const valueOfDisbursementDate = disbursementDate.value;
@@ -60,13 +61,18 @@ export const FormInputView = {
     const loanTermError = document.querySelector('#loan-term-error');
     const interestRateError = document.querySelector('#interest-rate-error');
     const disbursementDateError = document.querySelector('#date-time-error');
+    const INDEX_OF_PROPERTYVALUE_ERRMESSAGE = 0;
+    const INDEX_OF_LOANAMOUNT_ERRMESSAGE = 1;
+    const INDEX_OF_LOANTERM_ERRMESSAGE = 2;
+    const INDEX_OF_INTERSTERATE_ERRMESSAGE = 3;
+    const INDEX_OF_DISBURSEMENTDATE_ERRMESSAGE = 4;
 
     // set message to error label
-    propertyValueError.textContent = errorsAndMessages.errorMessages[0];
-    loanAmountError.textContent = errorsAndMessages.errorMessages[1];
-    loanTermError.textContent = errorsAndMessages.errorMessages[2];
-    interestRateError.textContent = errorsAndMessages.errorMessages[3];
-    disbursementDateError.textContent = errorsAndMessages.errorMessages[4];
+    propertyValueError.textContent = errorsAndMessages.errorMessages[INDEX_OF_PROPERTYVALUE_ERRMESSAGE];
+    loanAmountError.textContent = errorsAndMessages.errorMessages[INDEX_OF_LOANAMOUNT_ERRMESSAGE];
+    loanTermError.textContent = errorsAndMessages.errorMessages[INDEX_OF_LOANTERM_ERRMESSAGE];
+    interestRateError.textContent = errorsAndMessages.errorMessages[INDEX_OF_INTERSTERATE_ERRMESSAGE];
+    disbursementDateError.textContent = errorsAndMessages.errorMessages[INDEX_OF_DISBURSEMENTDATE_ERRMESSAGE];
   },
 
   // set value of table result and Modal
@@ -78,25 +84,34 @@ export const FormInputView = {
     // set value to modal
     this.setValueOfModal(result);
   },
+  updateTextContent: function (element, value) {
+    element.textContent = !isNaN(value) ? LoanPaymentModel.reformater(Math.round(value)) : '0';
+  },
 
   // function to set value to row of table result
   setValueToTableRow: function (modalTable, item, number) {
 
+    const ORDINAL_ROW = 0;
+    const REPAYMENT_ROW = 1;
+    const REMAINING_ORIGINAL_ROW = 2;
+    const ORIGIN_ROW = 3;
+    const INTEREST_ROW = 4;
+    const TOTAL_ROW = 5;
     const row = modalTable.insertRow();
-    const ordinalNumber = row.insertCell(0);
-    const repaymentPeriod = row.insertCell(1);
-    const remainingOriginalAmount = row.insertCell(2);
-    const origin = row.insertCell(3);
-    const interest = row.insertCell(4);
-    const total = row.insertCell(5);
+    const ordinalNumber = row.insertCell(ORDINAL_ROW);
+    const repaymentPeriod = row.insertCell(REPAYMENT_ROW);
+    const remainingOriginalAmount = row.insertCell(REMAINING_ORIGINAL_ROW);
+    const origin = row.insertCell(ORIGIN_ROW);
+    const interest = row.insertCell(INTEREST_ROW);
+    const total = row.insertCell(TOTAL_ROW);
 
     ordinalNumber.textContent = number;
     repaymentPeriod.textContent = item.repaymentPeriod;
-    !isNaN(item.remainningOriginalAmount) ? remainingOriginalAmount.textContent = FormInputController.reformater(Math.round(item.remainningOriginalAmount)) : remainingOriginalAmount.textContent = '0';
-    !isNaN(item.origin) ? origin.textContent = FormInputController.reformater(Math.round(item.origin)) : origin.textContent = '0';
-    !isNaN(item.interest) ? interest.textContent = FormInputController.reformater(Math.round(item.interest)) : interest.textContent = '0';
-    !isNaN(item.toralPrincipalAndInterest) ? total.textContent = FormInputController.reformater(Math.round(item.toralPrincipalAndInterest)) : total.textContent = '0';
-
+    this.updateTextContent(remainingOriginalAmount, item.remainningOriginalAmount);
+    this.updateTextContent(origin, item.origin);
+    this.updateTextContent(interest, item.interest);
+    this.updateTextContent(total, item.toralPrincipalAndInterest);
+    
     // add css to record
     ordinalNumber.classList.add('content__result');
     repaymentPeriod.classList.add('content__result');

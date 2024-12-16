@@ -1,6 +1,6 @@
 import { PageLoadController } from "../controllers/page_load_controller";
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
+
 export const PageLoadView = {
   init: function () {
     const inputBox = document.querySelector('#datepicker');
@@ -24,10 +24,11 @@ export const PageLoadView = {
   changeValuesWhenSliderChange: function () {
     const slider = document.querySelector('#slider');
     const sliderValue = document.querySelector('#sliderValue');
-
     slider.addEventListener('input', () => {
+      const propertyValue = Number(document.querySelector('#property-value').value.replace(/\./g, ''));
+      const loanAmount = document.querySelector('#loan-amount');
       sliderValue.textContent = slider.value + '%';
-      PageLoadController.calculateLoanAmountByLoanRate(slider.value);
+      loanAmount.value = PageLoadController.calculateLoanAmountByLoanRate(slider.value, propertyValue, loanAmount);
     });
   },
 
@@ -43,8 +44,8 @@ export const PageLoadView = {
   calculateLoanRateByLoanAmount: function (inputEvent) {
     const sliderValue = document.querySelector('#sliderValue');
     const loanRate = document.querySelector('#slider');
-    const propertyValue = Number(document.querySelector('#property-value').value.replace(/,/g, ''));
-    let loanAmountValue = Number(inputEvent.target.value.replace(/,/g, ''));
+    const propertyValue = Number(document.querySelector('#property-value').value.replace(/\./g, ''));
+    let loanAmountValue = Number(inputEvent.target.value.replace(/\./g, ''));
     let loanRateValue = Math.floor(loanAmountValue / propertyValue * 100);
 
     if (isNaN(loanRateValue) || loanRateValue < 0) {
@@ -85,7 +86,7 @@ export const PageLoadView = {
 
   // active button left (decreasing balance sheet)
   activeButtonLeft: function () {
-    const button = document.querySelector("#btn-active-0");
+    const button = document.querySelector("#btn-decreasing-balance");
     const INDEX_OF_BUTTON = 0;
 
     button.addEventListener('click', () => {
@@ -95,7 +96,7 @@ export const PageLoadView = {
 
   // active button left (decreasing balance sheet)
   activeButtonRight: function () {
-    const button = document.querySelector("#btn-active-1");
+    const button = document.querySelector("#btn-decreasing-balance-sheet");
     const INDEX_OF_BUTTON = 1;
 
     button.addEventListener('click', () => {
@@ -107,19 +108,31 @@ export const PageLoadView = {
   activeButton: function (index) {
     const buttons = document.querySelectorAll('.btn');
     const underLine = document.querySelector('.line-under');
-    const lineWidth = underLine.style.width;
+    const isWidth50 = underLine.classList.contains('width-50');
 
     buttons.forEach((button, i) => {
       button.classList.toggle('active', i === index);
     });
-    underLine.style.left = `${index * 50}%`;
-    lineWidth === '50%' ? underLine.style.width = '44%' : underLine.style.width = '50%';
 
+    // delete old positions
+    underLine.classList.remove('position-0', 'position-1');
+    
+    // add class new position based on index
+    underLine.classList.add(`position-${index}`);
+
+    // change width
+    if (isWidth50) {
+      underLine.classList.remove('width-50');
+      underLine.classList.add('width-44');
+    } else {
+      underLine.classList.remove('width-44');
+      underLine.classList.add('width-50');
+    }
   },
 
   initializeDatePicker: function () {
     flatpickr("#datepicker", {
-      dateFormat: "d/m/Y" // Định dạng Ngày/Tháng/Năm
+      dateFormat: "d/m/Y" //format dd/mm/YYYY
     });
   }
 }

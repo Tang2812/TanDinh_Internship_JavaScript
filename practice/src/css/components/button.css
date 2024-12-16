@@ -36,6 +36,24 @@
   transition: left 0.3s ease;
 }
 
+
+.line-under.position-0 {
+  left: 0%;
+}
+
+.line-under.position-1 {
+  left: 50%;
+}
+
+.line-under.width-44 {
+  width: 44%;
+}
+
+.line-under.width-50 {
+  width: 50%;
+}
+
+
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 739px) {
   .button-container {

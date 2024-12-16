@@ -1,3 +1,4 @@
+import { LoanModel } from "../models/loan_model";
 import { PageLoadView } from "../views/page_load_view";
 export const PageLoadController = {
   init: function () {
@@ -11,9 +12,9 @@ export const PageLoadController = {
 
       number_input.addEventListener('input', (e) => {
         let value = e.target.value;
-        value = value.replace(/,/g, '');
+        value = value.replace(/\./g, '');
         if (!isNaN(value) && value !== '') {
-          value = Number(value).toLocaleString('en');
+          value = Number(value).toLocaleString('vi-VN');
         };
         e.target.value = value;
       })
@@ -22,21 +23,16 @@ export const PageLoadController = {
   },
 
   // change value of Loan amount
-  calculateLoanAmountByLoanRate: function (loanRate) {
-    const propertyValue = Number(document.querySelector('#property-value').value.replace(/,/g, ''));
-    const loanAmount = document.querySelector('#loan-amount');
-
-    let value = propertyValue * loanRate / 100;
-    loanAmount.value = Number(value).toLocaleString('en')
+  calculateLoanAmountByLoanRate: function (loanRate, propertyValue, loanAmount) {
+    let value = LoanModel.calculateLoanAmount(loanRate, propertyValue, loanAmount);
+    return Number(value).toLocaleString('vi-VN')
   },
 
   // get date today
   getDayToDay: function () {
     const date = new Date();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric'}
-    const result = date.toLocaleDateString('en-GB', options);
-
-
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
+    const result = date.toLocaleDateString('vi-VN', options);
     return result;
   }
 }
