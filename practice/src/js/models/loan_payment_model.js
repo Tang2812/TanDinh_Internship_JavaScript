@@ -1,10 +1,4 @@
 export class LoanPaymentModel {
-  origin;
-  remainningOriginalAmount;
-  interest;
-  toralPrincipalAndInterest;
-  repaymentPeriod;
-
   constructor(origin, remainningOriginalAmount, interest, repaymentPeriod) {
     this.origin = origin;
     this.remainningOriginalAmount = remainningOriginalAmount;

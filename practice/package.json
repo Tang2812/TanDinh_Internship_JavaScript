@@ -2,18 +2,17 @@
   "dependencies": {
     "flatpickr": "^4.6.13",
     "litepicker": "^2.0.12",
+    "parcel": "^2.13.3",
     "parcel-bundler": "^1.12.5",
     "xlsx": "^0.18.5"
   },
   "name": "practice",
   "version": "1.0.0",
   "source": "src/index.js",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url ./"
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
