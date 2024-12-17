@@ -1,5 +1,5 @@
 import FormInputController from "../controllers/form_input_controller";
-import { LoanPaymentModel } from "../models/loan_payment_model";
+import { Ultil } from "../utils/utils";
 export const FormInputView = {
 
   init: function () {
@@ -85,7 +85,7 @@ export const FormInputView = {
     this.setValueOfModal(result);
   },
   updateTextContent: function (element, value) {
-    element.textContent = !isNaN(value) ? LoanPaymentModel.reformater(Math.round(value)) : '0';
+    element.textContent = !isNaN(value) ? Ultil.reformater(Math.round(value)) : '0';
   },
 
   // function to set value to row of table result
@@ -111,7 +111,7 @@ export const FormInputView = {
     this.updateTextContent(origin, item.origin);
     this.updateTextContent(interest, item.interest);
     this.updateTextContent(total, item.toralPrincipalAndInterest);
-    
+
     // add css to record
     ordinalNumber.classList.add('content__result');
     repaymentPeriod.classList.add('content__result');

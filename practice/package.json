@@ -7,9 +7,13 @@
   },
   "name": "practice",
   "version": "1.0.0",
-  "main": "index.js",
+  "source": "src/index.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./"
   },
   "keywords": [],
   "author": "",

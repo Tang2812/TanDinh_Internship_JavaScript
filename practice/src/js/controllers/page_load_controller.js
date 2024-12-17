@@ -1,4 +1,5 @@
 import { LoanModel } from "../models/loan_model";
+import { Ultil } from "../utils/utils";
 import { PageLoadView } from "../views/page_load_view";
 export const PageLoadController = {
   init: function () {
@@ -30,10 +31,7 @@ export const PageLoadController = {
 
   // get date today
   getDayToDay: function () {
-    const date = new Date();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' }
-    const result = date.toLocaleDateString('vi-VN', options);
-    return result;
+    return Ultil.getDayToDay();
   }
 }
 
