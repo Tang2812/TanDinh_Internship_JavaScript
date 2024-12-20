@@ -84,6 +84,11 @@ export const FormInputView = {
     // set value to modal
     this.setValueOfModal(result);
   },
+
+  setValueOfMonthlyPaymentResult: function (monthlyPaymentAmount, totalInterestPayable) {
+    this.setValueOfMonthlyPaymentTable(monthlyPaymentAmount, totalInterestPayable);
+  },
+
   updateTextContent: function (element, value) {
     element.textContent = !isNaN(value) ? Ultil.reformater(Math.round(value)) : '0';
   },
@@ -161,7 +166,16 @@ export const FormInputView = {
     totaInterestPaypleText.textContent = `${totaInterestPayple} VND`;
     minMonthlyPaymentText.textContent = `${minMonthlyPayment} VND`;
     maxMonthlyPaymentText.textContent = `${maxMonthlyPayment} VND`;
-  }
+  },
+
+  // set value of monthly payment result
+  setValueOfMonthlyPaymentTable: function (monthlyPaymentAmount, totalInterestPayable) {
+    const monthlyPaymentAmountTex = document.querySelector('#monthly-payment-amount');
+    const totalInterestPayableText = document.querySelector('#total-money-payable')
+
+    monthlyPaymentAmountTex.textContent = `${monthlyPaymentAmount} VND`;
+    totalInterestPayableText.textContent = `${totalInterestPayable} VND`;
+  },
 
 }
 

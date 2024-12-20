@@ -56,12 +56,19 @@ const FormInputController = {
     const finalTotalInterestPayable = Ultil.checkIfNAN(totalInterestPayable);
     const finalMinMonthlyPayment = Ultil.checkIfNAN(minMonthlyPayment);
     const finalMaxMonthlyPayment = Ultil.checkIfNAN(maxMonthlyPayment);
-
+    const finalInterstPayable = Ultil.checkIfNAN(object.calculateInterestPayable());
     // Save data to localStorage
     localStorage.setItem('result', JSON.stringify(result));
 
     // Set value for table result
     FormInputView.setValueOfTableResultAndModal(finalTotalInterestPayable, finalMinMonthlyPayment, finalMaxMonthlyPayment, totalInterest, totalOrigin, result);
+
+    // Set value for monthly payment sheet
+    if (loanTerm < 2) {
+      FormInputView.setValueOfMonthlyPaymentResult(finalMinMonthlyPayment, finalInterstPayable);
+    } else {
+      FormInputView.setValueOfMonthlyPaymentResult(finalMaxMonthlyPayment, finalInterstPayable);
+    }
   },
 
   // validate value

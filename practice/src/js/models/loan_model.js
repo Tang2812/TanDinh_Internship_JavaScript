@@ -16,4 +16,9 @@ export class LoanModel {
   static calculateLoanAmount(loanRate, propertyValue) {
     return propertyValue * loanRate / 100;
   }
+
+  // Calculate interst payable
+  calculateInterestPayable() {
+    return this.loanAmount + this.loanAmount * this.interestRate / 100
+  }
 }

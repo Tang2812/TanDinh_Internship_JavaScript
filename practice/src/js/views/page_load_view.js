@@ -6,6 +6,7 @@ export const PageLoadView = {
     const inputBox = document.querySelector('#datepicker');
     this.reformatNumber();
     this.changeValuesWhenSliderChange();
+    this.changeLoanAmountWhenInputProperty();
     this.getDate(inputBox);
     this.changeLoanRateByLoanAmount();
     this.openCloseModal();
@@ -25,6 +26,20 @@ export const PageLoadView = {
     const slider = document.querySelector('#slider');
     const sliderValue = document.querySelector('#sliderValue');
     slider.addEventListener('input', () => {
+      const propertyValue = Number(document.querySelector('#property-value').value.replace(/\./g, ''));
+      const loanAmount = document.querySelector('#loan-amount');
+      sliderValue.textContent = slider.value + '%';
+      loanAmount.value = PageLoadController.calculateLoanAmountByLoanRate(slider.value, propertyValue, loanAmount);
+    });
+  },
+
+
+  // change loan amount when input property value
+  changeLoanAmountWhenInputProperty: function () {
+    const propertyValueBox = document.querySelector('#property-value');
+    const slider = document.querySelector('#slider');
+    const sliderValue = document.querySelector('#sliderValue');
+    propertyValueBox.addEventListener('input', () => {
       const propertyValue = Number(document.querySelector('#property-value').value.replace(/\./g, ''));
       const loanAmount = document.querySelector('#loan-amount');
       sliderValue.textContent = slider.value + '%';
@@ -88,9 +103,11 @@ export const PageLoadView = {
   activeButtonLeft: function () {
     const button = document.querySelector("#btn-decreasing-balance");
     const INDEX_OF_BUTTON = 0;
+    const monthlyPaymentResult = document.querySelector('.monnthly-payment-calculate__result');
+    const tableResult = document.querySelector('.calculate__result');
 
     button.addEventListener('click', () => {
-      this.activeButton(INDEX_OF_BUTTON);
+      this.activeButton(INDEX_OF_BUTTON, tableResult, monthlyPaymentResult);
     });
   },
 
@@ -98,14 +115,16 @@ export const PageLoadView = {
   activeButtonRight: function () {
     const button = document.querySelector("#btn-decreasing-balance-sheet");
     const INDEX_OF_BUTTON = 1;
+    const monthlyPaymentResult = document.querySelector('.monnthly-payment-calculate__result');
+    const tableResult = document.querySelector('.calculate__result');
 
     button.addEventListener('click', () => {
-      this.activeButton(INDEX_OF_BUTTON);
+      this.activeButton(INDEX_OF_BUTTON, monthlyPaymentResult, tableResult);
     });
   },
 
   // change button style and under line
-  activeButton: function (index) {
+  activeButton: function (index, sheetOpen, sheetClose) {
     const buttons = document.querySelectorAll('.btn');
     const underLine = document.querySelector('.line-under');
     const isWidth50 = underLine.classList.contains('width-50');
@@ -116,7 +135,7 @@ export const PageLoadView = {
 
     // delete old positions
     underLine.classList.remove('position-0', 'position-1');
-    
+
     // add class new position based on index
     underLine.classList.add(`position-${index}`);
 
@@ -128,6 +147,12 @@ export const PageLoadView = {
       underLine.classList.remove('width-44');
       underLine.classList.add('width-50');
     }
+
+    // open sheet need open
+    sheetOpen.classList.remove('display--none');
+
+    // close sheet need close
+    sheetClose.classList.add('display--none');
   },
 
   initializeDatePicker: function () {

@@ -1,4 +1,6 @@
 import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
+import { saveAs } from 'file-saver';
 export class Ultil {
   // get date today
   static getDayToDay() {
@@ -94,12 +96,61 @@ export class Ultil {
     return newDate;
   }
 
-  // export file
   static exportToXLSX() {
+    //Get data from local storage, change to json
     const result = JSON.parse(localStorage.getItem('result'));
-    const worksheet = XLSX.utils.json_to_sheet(result);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Loans');
-    XLSX.writeFile(workbook, 'loan_data.xlsx');
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Loans');
+
+    // add data to worksheet
+    worksheet.columns = Object.keys(result[0]).map(key => ({ header: key, key, width: 15 }));
+    result.forEach(data => {
+      worksheet.addRow(data);
+    });
+
+    // set width of cells
+    worksheet.columns.forEach(column => {
+      let maxLength = 0;
+      column.eachCell({ includeEmpty: true }, cell => {
+        const cellValue = cell.value ? cell.value.toString() : '';
+        maxLength = Math.max(maxLength, cellValue.length);
+      });
+      // width cell = width content + 5 spaces
+      column.width = maxLength + 5;
+    });
+
+    // format all cell on sheet
+    worksheet.eachRow({ includeEmpty: false }, (row) => {
+      row.eachCell({ includeEmpty: false }, (cell) => {
+        cell.font = {
+          name: 'Times New Roman',
+          size: 13
+        };
+        cell.alignment = {
+          horizontal: 'center',
+          vertical: 'middle'
+        };
+        if (typeof cell.value === 'number') {
+          cell.numFmt = '#,##0';
+        }
+
+        //add boder
+        cell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+      });
+    });
+
+    // export to file
+    workbook.xlsx.writeBuffer()
+      .then(buffer => {
+        saveAs(new Blob([buffer]), 'loan_data.xlsx');
+      })
+      .catch(err => {
+        console.error('Error writing file:', err);
+      });
   }
 }
